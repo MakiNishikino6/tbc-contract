@@ -89,7 +89,7 @@ class FT {
      * @param address_to - The recipient's address.
      * @returns The raw transaction hex string.
      */
-    private async MintFT(privateKey_from: tbc.PrivateKey, address_to: string): Promise<string> {
+    async MintFT(privateKey_from: tbc.PrivateKey, address_to: string): Promise<string> {
         const privateKey = privateKey_from;
         const address_from = privateKey.toAddress().toString();
         const name = this.name;
@@ -252,7 +252,7 @@ class FT {
             }
             hash = addressOrHash + '01';
         }
-        const url_testnet = `http://tbcdev.org:5000/v1/tbc/main/ft/utxo/combine/script/${hash}/contract/${contractTxid}`;
+        const url_testnet = `https://tbcdev.org/v1/tbc/main/ft/utxo/combine/script/${hash}/contract/${contractTxid}`;
         const url_mainnet = `https://turingwallet.xyz/v1/tbc/main/ft/utxo/combine/script/${hash}/contract/${contractTxid}`;
         let url = this.network == "testnet" ? url_testnet : url_mainnet;
         try {
@@ -301,7 +301,7 @@ class FT {
      * @throws {Error} Throws an error if the request to fetch FT information fails.
      */
     async fetchFtInfo(contractTxid: string): Promise<FtInfo> {
-        const url_testnet = `http://tbcdev.org:5000/v1/tbc/main/ft/info/contract/id/${contractTxid}`;
+        const url_testnet = `https://tbcdev.org/v1/tbc/main/ft/info/contract/id/${contractTxid}`;
         const url_mainnet = `https://turingwallet.xyz/v1/tbc/main/ft/info/contract/id/${contractTxid}`;
         let url = this.network == "testnet" ? url_testnet : url_mainnet;
         try {
@@ -340,7 +340,7 @@ class FT {
         const privateKey = privateKey_from;
         const address = privateKey.toAddress().toString();
         const contractTxid = this.contractTxid;
-        const url_testnet = `http://tbcdev.org:5000/v1/tbc/main/ft/utxo/address/${address}/contract/${contractTxid}`;
+        const url_testnet = `https://tbcdev.org/v1/tbc/main/ft/utxo/address/${address}/contract/${contractTxid}`;
         const url_mainnet = `https://turingwallet.xyz/v1/tbc/main/ft/utxo/address/${address}/contract/${contractTxid}`;
         let url = this.network == "testnet" ? url_testnet : url_mainnet;
         const fttxo_codeScript = FT.buildFTtransferCode(this.codeScript, address).toBuffer().toString('hex');
